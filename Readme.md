@@ -1,50 +1,53 @@
-# Early Diabetes Risk Prediction
+# Cardiovascular Heart Disease Risk Forecasting
 
-A machine learning system that predicts a patient's risk of diabetes from basic health metrics, using a Logistic Regression model trained on the Pima Indians Diabetes Dataset. Includes exploratory data analysis, a trained/serialized model, and an interactive Streamlit web app for real-time risk checks.
+A machine learning system that predicts a patient's risk of cardiovascular heart disease from clinical measurements, using a Logistic Regression model. Includes exploratory data analysis, a trained/serialized model, and an interactive Streamlit web app for real-time risk checks.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CodewithShahriar/Early-Diabetes-Risk-Prediction/blob/main/Diabetes%20Risk%20Prediction.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/CodewithShahriar/Cardiovascular-Heart-Disease-Risk-Forecasting/blob/main/Cardiovascular_Heart_Disease_Risk_Forecasting.ipynb)
 
 ## Overview
 
-This project trains a binary classifier to predict whether a patient is likely to have diabetes based on eight diagnostic measurements. It walks through data preprocessing, model training and evaluation, exploratory visualizations, and deployment as a lightweight web application.
+This project trains a binary classifier to predict whether a patient is likely to have heart disease based on thirteen clinical measurements. It walks through model training and evaluation, exploratory visualizations, and deployment as a lightweight web application.
 
 ## Features
 
-* **Data preprocessing** — feature/label split and standardization with `StandardScaler`
-* **Model training** — Logistic Regression classifier with train/test split (80/20, stratified)
-* **Model evaluation** — accuracy score on held-out test data
-* **Exploratory data analysis** — age distribution plot and feature correlation heatmap
-* **Regression analysis** — linear regression exploring the relationship between BMI and glucose level
-* **Model persistence** — trained model and scaler saved with `joblib` for reuse
-* **Web application** — Streamlit app for interactive, single-patient risk prediction
+- **Model training** — Logistic Regression classifier with train/test split (80/20, stratified)
+- **Model evaluation** — accuracy score on held-out test data
+- **Exploratory data analysis** — cholesterol distribution plot and feature correlation heatmap
+- **Regression analysis** — linear regression exploring the relationship between age and cholesterol
+- **Model persistence** — trained model saved with `joblib` for reuse
+- **Web application** — Streamlit app for interactive, single-patient risk prediction
 
 ## Dataset
 
-The model is trained on the **Pima Indians Diabetes Dataset** (`diabetes.csv`), which contains the following features:
+The model is trained on a **Heart Disease dataset** (`heart.csv`), which contains the following features:
 
-|Feature|Description|
-|-|-|
-|`Pregnancies`|Number of times pregnant|
-|`Glucose`|Plasma glucose concentration|
-|`BloodPressure`|Diastolic blood pressure (mm Hg)|
-|`SkinThickness`|Triceps skinfold thickness (mm)|
-|`Insulin`|2-hour serum insulin (mu U/ml)|
-|`BMI`|Body mass index|
-|`DiabetesPedigreeFunction`|Diabetes likelihood based on family history|
-|`Age`|Age in years|
-|`Outcome`|Target variable (0 = non-diabetic, 1 = diabetic)|
+| Feature | Description |
+|---|---|
+| `age` | Age in years |
+| `sex` | Sex (1 = male, 0 = female) |
+| `cp` | Chest pain type (0–3) |
+| `trestbps` | Resting blood pressure (mm Hg) |
+| `chol` | Serum cholesterol (mg/dl) |
+| `fbs` | Fasting blood sugar > 120 mg/dl (1 = true, 0 = false) |
+| `restecg` | Resting electrocardiographic results (0–2) |
+| `thalach` | Maximum heart rate achieved |
+| `exang` | Exercise-induced angina (1 = yes, 0 = no) |
+| `oldpeak` | ST depression induced by exercise |
+| `slope` | Slope of the peak exercise ST segment (0–2) |
+| `ca` | Number of major vessels colored by flourosopy (0–4) |
+| `thal` | Thalassemia (0–3) |
+| `target` | Target variable (0 = no heart disease, 1 = heart disease) |
 
-> \*\*Note:\*\* The `diabetes.csv` file is not included in this repository. Download it from a public source such as \[Kaggle](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) and place it in the project root before running the notebook.
+> **Note:** The `heart.csv` file is not included in this repository. Download it from a public source such as [Kaggle](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) and place it in the project root before running the notebook.
 
 ## Project Structure
 
 ```
 .
-├── Diabetes Risk Prediction.ipynb   # Main notebook: training, EDA, and app generation
-├── diabetes.csv                     # Dataset (not included — see Dataset section)
-├── app.py                           # Streamlit app (generated by the notebook)
-├── diabetes\_model.pkl               # Serialized trained model (generated by the notebook)
-├── diabetes\_scaler.pkl              # Serialized feature scaler (generated by the notebook)
+├── Cardiovascular_Heart_Disease_Risk_Forecasting.ipynb   # Main notebook: training, EDA, and app generation
+├── heart.csv                                             # Dataset (not included — see Dataset section)
+├── app_heart.py                                           # Streamlit app (generated by the notebook)
+├── heart_model.pkl                                        # Serialized trained model (generated by the notebook)
 └── README.md
 ```
 
@@ -52,52 +55,48 @@ The model is trained on the **Pima Indians Diabetes Dataset** (`diabetes.csv`), 
 
 ### Prerequisites
 
-* Python 3.8+
-* pip
+- Python 3.8+
+- pip
 
 ### Installation
 
 1. Clone the repository:
-
-```bash
-   git clone https://github.com/CodewithShahriar/Early-Diabetes-Risk-Prediction.git
-   cd Early-Diabetes-Risk-Prediction
+   ```bash
+   git clone https://github.com/CodewithShahriar/Cardiovascular-Heart-Disease-Risk-Forecasting.git
+   cd Cardiovascular-Heart-Disease-Risk-Forecasting
    ```
 
 2. Install the required dependencies:
-
-```bash
+   ```bash
    pip install numpy pandas scikit-learn matplotlib seaborn joblib streamlit
    ```
 
-3. Add the `diabetes.csv` dataset to the project root (see [Dataset](#dataset)).
+3. Add the `heart.csv` dataset to the project root (see [Dataset](#dataset)).
 
 ### Training the Model
 
-Run the notebook `Diabetes Risk Prediction.ipynb` end to end. This will:
-
-1. Load and preprocess the dataset
+Run the notebook `Cardiovascular_Heart_Disease_Risk_Forecasting.ipynb` end to end. This will:
+1. Load the dataset and split it into training/test sets
 2. Train the Logistic Regression model and print its accuracy
 3. Generate exploratory visualizations
-4. Save the trained model (`diabetes\_model.pkl`) and scaler (`diabetes\_scaler.pkl`)
-5. Generate the Streamlit app file (`app.py`)
+4. Save the trained model (`heart_model.pkl`)
+5. Generate the Streamlit app file (`app_heart.py`)
 
 ### Running the Web App
 
-Once `app.py`, `diabetes\_model.pkl`, and `diabetes\_scaler.pkl` have been generated, launch the app locally:
+Once `app_heart.py` and `heart_model.pkl` have been generated, launch the app locally:
 
 ```bash
-streamlit run app.py
+streamlit run app_heart.py
 ```
 
-Then open the local URL shown in your terminal (typically `http://localhost:8501`). Enter the patient's health metrics and click **Check Risk** to get a prediction.
+Then open the local URL shown in your terminal (typically `http://localhost:8501`). Enter the patient's clinical data and click **Predict Heart Health** to get a prediction.
 
 ## Model Details
 
-* **Algorithm:** Logistic Regression (`scikit-learn`)
-* **Preprocessing:** Feature standardization via `StandardScaler`
-* **Train/Test Split:** 80% train / 20% test, stratified on the target variable
-* **Evaluation Metric:** Accuracy score on the test set
+- **Algorithm:** Logistic Regression (`scikit-learn`, `max_iter=1000`)
+- **Train/Test Split:** 80% train / 20% test, stratified on the target variable
+- **Evaluation Metric:** Accuracy score on the test set
 
 ## Disclaimer
 
@@ -109,5 +108,4 @@ This project is available under the MIT License. See the `LICENSE` file for deta
 
 ## Acknowledgments
 
-* Dataset: [Pima Indians Diabetes Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database)
-
+- Dataset: [Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset)
